@@ -20,6 +20,7 @@ import AdminLeaveSansaction from './pages/Admin/AdminLeaveSansaction';
 import EmpHome from './pages/Employees/EmpHome';
 import EmpSettings from './pages/Employees/EmpSettings';
 import UserDetails from './pages/Employees/UserDetails';
+import UserLeave from './pages/Employees/UserLeave';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -46,6 +47,7 @@ export default function App() {
         <Stack.Screen name='EmpHome' component={EmpHome} />
         <Stack.Screen name='EmpSettings' component={EmpSettings} />
         <Stack.Screen name='UserDetails' component={UserDetails} />
+        <Stack.Screen name='UserLeave' component={UserLeave} />
         
         
       </Stack.Navigator>

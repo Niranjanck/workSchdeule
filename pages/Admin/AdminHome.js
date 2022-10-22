@@ -7,6 +7,7 @@ import AdminNotification from './AdminNotification';
 import AdminSettings from './AdminSettings';
 import AdminSchedule from './AdminSchedule';
 import { Ionicons , FontAwesome } from "@expo/vector-icons";
+import AdminLeaveSansaction from './AdminLeaveSansaction';
 
 
 const Tab = createBottomTabNavigator();
@@ -34,7 +35,7 @@ const AdminHome = ({ navigation }) => {
             />
             <Tab.Screen
                 name="Leave"
-                component={AdminNotification}
+                component={AdminLeaveSansaction}
                 options={{
                     tabBarLabel: 'Leave',
                     tabBarIcon: ({ color, size }) => (

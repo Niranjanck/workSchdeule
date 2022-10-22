@@ -20,7 +20,6 @@ const AddUser = ({ navigation }) => {
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
     const [Dept, setDept] = useState('');
-    const [uid, setUid] = useState('');
     const [Name, setName] = useState('');
     let empEmail = Email;
     const [deptList, setDeptList] = useState([]);
@@ -55,7 +54,6 @@ const addUser = () => {
     const userDetails = async () => {
         try {
             await setDoc(doc(db, 'userDetails',auth.currentUser.uid), {
-                userID: uid,
                 userEmail: empEmail,
                 userDept: Dept,
                 userName: Name,
@@ -75,11 +73,11 @@ const addUser = () => {
         }
     }
     const createUser = () => {
-        if (uid!='' && Email != '' && Password != '' && Dept != '' && Name != '') {
+        if (Email != '' && Password != '' && Dept != '' && Name != '') {
             
             createUserWithEmailAndPassword(auth, Email, Password)
                 .then((userCredentials) => {
-                    // Signed in 
+                    // Signed in
                     // ...
                     const user = userCredentials.user;
                     alert('User Created')
@@ -88,7 +86,6 @@ const addUser = () => {
                 .catch((error) => {
                     alert("something went wrong")
                 });
-            
         }
         else
         {
@@ -117,8 +114,6 @@ const addUser = () => {
                         onChangeText={ (value) => setEmail(value)}
                         
                     />
-                    <Text style={styles.NameText} >Enter User id</Text>
-                    <TextInput style={styles.Input} placeholder="User id" onChangeText={ (value) => setUid(value)} />
                     <Text style={styles.NameText} >Enter User Password</Text>
                     <TextInput style={styles.Input} placeholder="User Password"
                         onChangeText={ (value)=>setPassword(value)}

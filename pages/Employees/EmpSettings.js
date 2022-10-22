@@ -24,10 +24,10 @@ const EmpSettings = ({ navigation }) => {
       <ScrollView style={styles.mainMenu}>
         <View style={styles.container}>
           
-          <TouchableOpacity style={styles.chatPersons} onPress={()=>{navigation.replace('UserLogin')}}>
+          <TouchableOpacity style={styles.chatPersons} onPress={()=>{navigation.replace('UserDetails')}}>
             <View style={styles.wrapper}>
               <Text style={styles.textOptions}>
-                Add Department
+                userDetails
               </Text>
             </View>
           </TouchableOpacity>

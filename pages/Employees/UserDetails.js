@@ -1,53 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import { Appbar, RadioButton } from 'react-native-paper'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, FlatList } from 'react-native'
-import { Divider } from 'react-native-elements';
-import { auth,db,rDb } from '../../firebase'
-import { signOut, onAuthStateChanged } from 'firebase/auth';
-import { ActivityIndicator } from 'react-native';
-// import { Picker } from 'react-native-picker/picker';
-import { collection, getDocs, QuerySnapshot } from 'firebase/firestore';
-import Select from 'react-select';
-import { onValue, ref } from 'firebase/database';
+import { auth, db, rDb } from '../../firebase'
+import { Provider, Appbar, Card } from 'react-native-paper'
+import { collection, getDoc, QuerySnapshot,doc } from 'firebase/firestore';
+import { async } from '@firebase/util';
 const UserDetails = ({ navigation }) => {
-    // const [Department, setDepartment] = useState('')
-    // const [dptList,setDptList]=useState([])
-    // useEffect(() => {
-    //     const list = []
-    //     const querySnapshot = getDocs(collection(db, 'department'))
-    //         .then((docs) => {
-    //             docs.forEach((doc) => {
-    //             list.push(doc.data().DeptName)
-    //             })
-    //             setDptList(list)
-    //         })
-    //         .catch((err) => {
-    //         console.log(err)
-    //         })
-    //     return querySnapshot
-    // }, []);
-    const [dept, setDept] = useState({});
-    const [loading, setLoading] = useState('');
-    useEffect(() => {
-        return onValue(ref(db, '/todo'), QuerySnapshot => {
-            let data = querySnapshot.val() || {};
-            let todoItems = { ...data };
-            setDept(todoItems);
-        });
-    }, []);
+    const [userName, setUserName] = useState('')
+    
+    // useEffect( async () => {
+        
+    //     const docRef = doc(db, "userDetails", auth.currentUser.uid);
+    //     const docSnap = await getDoc(docRef).then((data) => {
+    //         setUserName(data.data().name)
+    //     })
+            
+    //     return docSnap
+    // }, [])
+
     return (
         <>
-            <View style={styles.container}>
-                <RadioButton.Group
-                    onValueChange={onCheck}
-                    value={doneState}
-                >
-                    <View style={styles.radio}>
-                        <Text style={styles.radioText}>Department</Text>
-                        <RadioButton value="IT" /> 
-                    </View>
-                </RadioButton.Group>
+            <Appbar style={{ backgroundColor: "green", minHeight: 100 }}>
+                <Text style={{ fontSize: 20 }}>
+                    User Details
+                </Text>
+            </Appbar>
+            <ScrollView style={styles.mainMenu}>
+                <View style={styles.container}>
+                    <Text style={styles.textOptions}>
+                        User Details
+                    </Text>
                 </View>
+                <View style={styles.container}>
+                    <Text style={styles.textOptions}>
+                        Name
+                    </Text>
+                    <Text style={styles.textOptions}>
+                        {/* {userName} */}
+                    </Text>
+                    
+                </View>
+                
+            </ScrollView>
         </>
     )
 }

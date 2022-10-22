@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import EmpSettings from './EmpSettings';
 import UserDetails from './UserDetails';
+import UserLeave from './UserLeave';
 import { Ionicons , FontAwesome } from "@expo/vector-icons";
 
 
@@ -31,7 +32,7 @@ const EmpHome = ({ navigation }) => {
             />
             <Tab.Screen
                 name="Leave"
-                component={EmpSettings}
+                component={UserLeave}
                 options={{
                     tabBarLabel: 'Leave',
                     tabBarIcon: ({ color, size }) => (

@@ -29,7 +29,10 @@
     "react-datepicker": "^4.8.0",
     "react-datetime-picker": "^3.5.0",
     "react-dom": "18.0.0",
+    "react-multi-date-picker": "^3.3.4",
     "react-native": "0.69.6",
+    "react-native-common-date-picker": "^2.3.8",
+    "react-native-date-picker": "^4.2.5",
     "react-native-datepicker": "^1.7.2",
     "react-native-dropdown-picker": "^5.4.2",
     "react-native-dropdown-select-list": "^1.0.21",
@@ -37,11 +40,13 @@
     "react-native-elements": "^3.4.2",
     "react-native-email": "^2.1.0",
     "react-native-firebase": "^5.6.0",
+    "react-native-modern-datepicker": "^1.0.0-beta.91",
     "react-native-paper": "^4.12.4",
     "react-native-picker-select": "^8.0.4",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.7",
-    "react-select": "^5.4.0"
+    "react-select": "^5.4.0",
+    "reactnative-neat-date-picker-2022": "^1.2.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
