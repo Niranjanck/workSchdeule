@@ -6,6 +6,9 @@ import EmpSettings from './EmpSettings';
 import UserDetails from './UserDetails';
 import UserLeave from './UserLeave';
 import { Ionicons , FontAwesome } from "@expo/vector-icons";
+import EmpGroup from './EmpGroup';
+import EmpChat from './EmpChat';
+import EmpScheduleList from './EmpScheduleList';
 
 
 const Tab = createBottomTabNavigator();
@@ -22,7 +25,7 @@ const EmpHome = ({ navigation }) => {
         >
             <Tab.Screen
                 name="Home" 
-                component={UserDetails}
+                component={EmpChat}
                 options={{
                     tabBarLabel: 'Chat',
                     tabBarIcon: ({ color, size }) => (
@@ -42,7 +45,7 @@ const EmpHome = ({ navigation }) => {
             />
             <Tab.Screen
                 name="Schedule"
-                component={EmpSettings}
+                component={EmpScheduleList}
                 options={{
                     tabBarLabel: 'Calendar',
                     tabBarIcon: ({ color, size }) => (
@@ -64,4 +67,6 @@ const EmpHome = ({ navigation }) => {
             </>
     );
 }
+
+
 export default EmpHome;

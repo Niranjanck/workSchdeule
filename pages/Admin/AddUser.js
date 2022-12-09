@@ -9,7 +9,8 @@ import {
 } from 'react-native'
 import { Provider, Appbar, Card } from 'react-native-paper'
 import email from 'react-native-email'
-import { auth, db } from '../../firebase'
+import { auth, db, rDb } from '../../firebase'
+import {ref,set,child,get,getDatabase} from 'firebase/database';
 import { createUserWithEmailAndPassword, EmailAuthProvider, getAuth, reauthenticateWithCredential, signInWithEmailAndPassword } from 'firebase/auth';
 import { collection,addDoc,query,onSnapshot,getDocs, setDoc, doc } from 'firebase/firestore';
 import SelectList from 'react-native-dropdown-select-list';
@@ -39,21 +40,21 @@ const AddUser = ({ navigation }) => {
     },[])
 const addUser = () => {
     
-    // const to = [Email] // string or array of email addresses
-    // email(to, {
-    //     // Optional additional arguments
-    //     cc: [], // string or array of email addresses
-    //     bcc: [], // string or array of email addresses
-    //     subject: 'Work Schedule',
-    //     body: 'Hello '+ Name +'Your password is ' + Password + ' and your department is ' + Dept + '.'
-    // }).catch(console.error)
-    // userDetails();
     createUser();
+    const to = [Email] // string or array of email addresses
+    email(to, {
+        // Optional additional arguments
+        cc: [], // string or array of email addresses
+        bcc: [], // string or array of email addresses
+        subject: 'Work Schedule',
+        body: 'Hello '+ Name +' Your password is ' + Password + ' and your department is ' + Dept + '.'
+    }).catch(console.error)
+    // userDetails();
     
 }
     const userDetails = async () => {
         try {
-            await setDoc(doc(db, 'userDetails',auth.currentUser.uid), {
+            await setDoc(doc(db, 'userDetails',empEmail), {
                 userEmail: empEmail,
                 userDept: Dept,
                 userName: Name,
@@ -92,9 +93,20 @@ const addUser = () => {
 
             alert("Please enter all details"+Email+Password+Dept+Name)
         }
-        
-
     }
+    // const setLeave = async () => {
+    //     try {
+    //         set(ref(rDb, 'leaveDetails/' + Email), {
+    //             reason: '',
+    //             status: '',
+    //             date: '',
+    //             employee:Email
+    //         })
+    //     }
+    //     catch (error) {
+    //         alert(error)
+    //     }
+    // }
     return (
         <>
             <ScrollView style={styles.ScreenView}>
@@ -115,14 +127,14 @@ const addUser = () => {
                         
                     />
                     <Text style={styles.NameText} >Enter User Password</Text>
-                    <TextInput style={styles.Input} placeholder="User Password"
+                    <TextInput style={styles.Input} placeholder="User Password" secureTextEntry={true}
                         onChangeText={ (value)=>setPassword(value)}
                     />
                     <View style={styles.container}>
                         <Text style={styles.NameText}>Select User Department</Text> 
                         {/* drop list */}
-                        <SelectList setSelected={setDept} data={deptList} />
                     </View>
+                        <SelectList setSelected={setDept} data={deptList} style={styles.dropp} />
                     <View style={styles.btn}>
                         <Button title="Add User"  onPress={addUser}/>
                     </View>
@@ -162,8 +174,9 @@ const addUser = () => {
         left: 100,
     },
     container: {
-      backgroundColor: 'white',
-      padding: 16,
+        backgroundColor: 'white',
+        marginBottom: 40,
+      //padding: 16,
     },
     dropdown: {
       height: 50,
@@ -185,6 +198,9 @@ const addUser = () => {
     inputSearchStyle: {
       height: 40,
       fontSize: 16,
-  },
+        },
+        dropp: {
+        marginTop: 10,
+    }
 })
 export default AddUser

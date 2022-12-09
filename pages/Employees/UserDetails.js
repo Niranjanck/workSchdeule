@@ -19,7 +19,7 @@ const UserDetails = ({ navigation }) => {
 
     return (
         <>
-            <Appbar style={{ backgroundColor: "green", minHeight: 100 }}>
+            <Appbar style={{ backgroundColor: "#1e90ff", minHeight: 100 }}>
                 <Text style={{ fontSize: 20 }}>
                     User Details
                 </Text>

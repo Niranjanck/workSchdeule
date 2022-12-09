@@ -4,7 +4,7 @@ import { auth, db, rDb } from '../../firebase'
 import { Provider, Appbar, Card,Button, TextInput } from 'react-native-paper'
 import { collection, getDoc, QuerySnapshot,doc,setDoc, onSnapshot, DocumentSnapshot } from 'firebase/firestore';
 import { async } from '@firebase/util';
-import {ref,set,child,get,getDatabase} from 'firebase/database';
+
 import DatePicker from 'react-native-modern-datepicker';
 const UserDetails = ({ navigation }) => {
     const [show, setShow] = useState(false);
@@ -13,11 +13,27 @@ const UserDetails = ({ navigation }) => {
     const [leave, setLeave] = useState({});
     let date1 = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
     let maxDate =new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + (new Date().getDate()+7);
+    let email = auth.currentUser.email;
+    const userLeaveDetails = async () => {
+        const leaveDetails = doc(db, 'leaveDetails', auth.currentUser.email);
+        const docSnap = getDoc(leaveDetails);
+        docSnap.then((doc) => {
+            if (doc.exists()) {
+                setLeave(doc.data());
 
-
+            }
+            else
+            {
+                console.log("No such document");
+            
+                }
+        }
+        )
+    }
     useEffect(() => {
         console.log(maxDate);
-        // const leaveDetails = doc(db, 'leaveDetails', auth.currentUser.uid);
+        userLeaveDetails();
+        // const leaveDetails = doc(db, 'leaveDetails', auth.currentUser.email);
         // const docSnap = getDoc(leaveDetails);
         // docSnap.then((doc) => {
         //     if (doc.exists()) {
@@ -31,55 +47,60 @@ const UserDetails = ({ navigation }) => {
         //         }
         // }
         // )
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, 'leaveDetails/' + auth.currentUser.uid)).then((snapshot) => {
-            if (snapshot.exists()) {
-                setLeave(snapshot.val());
-            } else {
-                console.log("No data available");
+        // const dbRef = ref(getDatabase());
+        // try {
+        //     get(child(dbRef, 'leaveDetails/' + email)).then((snapshot) => {
+        //         if (snapshot.exists()) {
+        //             setLeave(snapshot.val());
+        //         } else {
+        //             console.log("No data available");
                 
-            }
-        }
-        ).catch((error) => {
-            console.error(error);
-        }
-        );
+        //         }
+        //     }
+        
+        //     ).catch((error) => {
+        //         console.error(error);
+        //     }
+        //     );
+        // } catch (error) {
+        //     console.log(error);
+        // }
 
     }, [])
     // add leave deatils to firebase
     const addLeave = async () => {
         console.log(reason,date);
         if (reason != '' && date != '') {
-        //const docRef = doc(rDb, "leaveDetails", auth.currentUser.uid);
+        const docRef = doc(db, "leaveDetails", auth.currentUser.email);
             
             try {
-                // await setDoc(docRef, {
-                //     reason: reason,
-                //     date: date,
-                //     status: "Pending",
-                //     employee: auth.currentUser.email
-                // })
-                //     .then(() => {
-                //         setDate('');
-                //         setReason('');
-                //     })
-            
-                // console.log("Document written with ID: ", docRef.id, date, maxDate);
-                // alert("Leave Applied Successfully")
-                
-                    set(ref(rDb, 'leaveDetails/' + auth.currentUser.uid), {
-                        reason: reason,
-                        date: date,
-                        status: 'pending',
-                        employee: auth.currentUser.email
-
+                await setDoc(docRef, {
+                    reason: reason,
+                    date: date,
+                    status: "Pending",
+                    employee: auth.currentUser.email
+                })
+                    .then(() => {
+                        setDate('');
+                        setReason('');
                     })
-                        .then(() => {
-                            setDate('');
-                            setReason('');
-                        }
-                    )
-                    alert("Leave Applied Successfully")
+            
+                console.log("Document written with ID: ", docRef.id, date, maxDate);
+                alert("Leave Applied Successfully")
+                
+                    // set(ref(rDb, 'leaveDetails/' + auth.currentUser.email), {
+                    //     reason: reason,
+                    //     date: date,
+                    //     status: 'pending',
+                    //     employee: auth.currentUser.email
+
+                    // })
+                    //     .then(() => {
+                    //         setDate('');
+                    //         setReason('');
+                    //     }
+                    // )
+                    // alert("Leave Applied Successfully")
                 
             } catch (e) {
                 console.error("Error adding document: ", e);
@@ -93,7 +114,7 @@ const UserDetails = ({ navigation }) => {
 
     return (
         <>
-            <Appbar style={{ backgroundColor: "green", minHeight: 100 }}>
+            <Appbar style={{ backgroundColor: "#1e90ff", minHeight: 100 }}>
                 <Text style={{ fontSize: 20 }}>
                     Leave From
                 </Text>
@@ -124,6 +145,13 @@ const UserDetails = ({ navigation }) => {
                         onPress={addLeave}
                     >Add
                     </Button>
+                    {/* <Button
+                        title='Refresh'
+                        style={styles.btnPicker}
+                        mode="contained"
+                        onPress={userLeaveDetails}
+                    >Refresh
+                    </Button> */}
                 </View>
                 {/* Leve details */}
                 <View style={styles.container}>

@@ -17,10 +17,18 @@ import AdminChangePass from './pages/Admin/AdminChangePass';
 import EmployeeList from './pages/Admin/EmployeeList';
 import RemoveUserAndDept from './pages/Admin/RemoveUserAndDept';
 import AdminLeaveSansaction from './pages/Admin/AdminLeaveSansaction';
+import GroupChat from './pages/Admin/GroupChat';
+import UserChat from './pages/Admin/UserChat';
+import ChatWithAdmin from './pages/Employees/ChatWithAdmin';
+import ChangePassword from './pages/ChangePassword';
+
 import EmpHome from './pages/Employees/EmpHome';
 import EmpSettings from './pages/Employees/EmpSettings';
 import UserDetails from './pages/Employees/UserDetails';
+import EmpChat from './pages/Employees/EmpChat';
+import EmpGroup from './pages/Employees/EmpGroup';
 import UserLeave from './pages/Employees/UserLeave';
+import EmpScheduleList from './pages/Employees/EmpScheduleList';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -43,12 +51,19 @@ export default function App() {
         <Stack.Screen name='EmployeeList' component={EmployeeList} />
         <Stack.Screen name='RemoveUserAndDept' component={RemoveUserAndDept} />
         <Stack.Screen name='AdminLeaveSansaction' component={AdminLeaveSansaction} />
+        <Stack.Screen name='GroupChat' component={GroupChat} />
+        <Stack.Screen name='UserChat' component={UserChat} />
         {/* Users Page */}
         <Stack.Screen name='EmpHome' component={EmpHome} />
         <Stack.Screen name='EmpSettings' component={EmpSettings} />
         <Stack.Screen name='UserDetails' component={UserDetails} />
         <Stack.Screen name='UserLeave' component={UserLeave} />
+        <Stack.Screen name='EmpChat' component={EmpChat} />
+        <Stack.Screen name='EmpGroup' component={EmpGroup} />
+        <Stack.Screen name='EmpScheduleList' component={EmpScheduleList} />
         
+        <Stack.Screen name='ChatWithAdmin' component={ChatWithAdmin} />
+        <Stack.Screen name='ChangePassword' component={ChangePassword} />
         
       </Stack.Navigator>
     </NavigationContainer>

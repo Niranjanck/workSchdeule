@@ -11,8 +11,6 @@ import { Divider } from 'react-native-elements';
 import { Provider, Appbar, Card } from 'react-native-paper'
 import { doc, deleteDoc,getDocs,collection } from 'firebase/firestore';
 import { auth, db } from '../../firebase'
-import { async } from '@firebase/util';
-import { deleteUser } from 'firebase/auth';
 import SelectList from 'react-native-dropdown-select-list';
 
 const RemoveUserAndDept = ({ navigation }) => {
@@ -103,7 +101,7 @@ const RemoveUserAndDept = ({ navigation }) => {
     <>
       <Appbar.Header style={{ backgroundColor: '#1e90ff' }}>
             <Appbar.BackAction onPress={() => navigation.navigate('AdminHome')} />
-            <Appbar.Content title="Add Department" />
+            <Appbar.Content title="Remove User and Department" />
         </Appbar.Header>
         <ScrollView style={styles.ScreenView}>
             <View style={styles.FullScreen}>
@@ -117,11 +115,13 @@ const RemoveUserAndDept = ({ navigation }) => {
                 </View>
         </View>
         <Divider orientation='horizontal' width={1} color='#000' marginTop={20 } />
-        <View style={styles.FullScreen}>
+        <View style={styles.halfScreen}>
           <Text style={styles.NameText}>Enter department ID to remove </Text>
           {/* drop list */}
-          <SelectList setSelected={setDept} data={deptList} />
-          <Text style={styles.NameText}>Enter admin Password</Text>
+          <View style={styles.dropList}>
+            <SelectList setSelected={setDept} data={deptList} style={styles.drop} />
+            </View>
+          <Text style={styles.PasswordField}>Enter admin Password</Text>
                 <TextInput style={styles.Input} placeholder="Password" secureTextEntry={true}
                     onChangeText={(value) => setPass(value)}
                 />
@@ -138,15 +138,16 @@ const RemoveUserAndDept = ({ navigation }) => {
 const styles = StyleSheet.create({
   FullScreen: {
     marginTop: 20,
+    padding: 10,
   },
     NameText: {
       fontSize: 20,
       marginLeft: 20,
-      marginTop: 10,
+     // marginTop: 10,
         color: 'black',
         letterSpacing: 1,
         alignItems: 'center',
-        top: 30,
+       // top: 30,
         left: 10,
 
     },
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         height: 40,
         width: 250,
-        top: 30,
+        //top: 30,
         borderRadius: 5,
         borderColor: '#1e90ff',
         marginTop: 10,
@@ -166,8 +167,35 @@ const styles = StyleSheet.create({
         width: 150,
         height: 50,
         backgroundColor: 'transparent',
-        top: 20,
+        top: 5,
         left: 100,
-    }
+  },
+  halfScreen: {
+    marginTop: 20,
+    padding: 10,
+    height:'auto',
+  },
+  dropList: {
+    width: 250,
+    height: 40,
+    //top: 30,
+    left: 30,
+    borderRadius: 5,
+    borderColor: '#1e90ff',
+   // marginTop: 10,
+    paddingLeft: 10,
+  },
+  PasswordField: {
+    fontSize: 20,
+    marginLeft: 20,
+    // marginTop: 10,
+    color: 'black',
+    letterSpacing: 1,
+    alignItems: 'center',
+    // top: 30,
+    left: 10,
+    marginTop: 20,
+
+  }
 })
 export default RemoveUserAndDept
