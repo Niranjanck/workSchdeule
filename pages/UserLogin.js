@@ -11,7 +11,7 @@ import {
 import { Button, Icon } from 'react-native-elements'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase'
-import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import { onAuthStateChanged, signInWithEmailAndPassword,sendPasswordResetEmail } from 'firebase/auth'
 
 const UserLogin = ({ navigation }) => {
   const [email, setEmail] = useState('')
@@ -32,9 +32,22 @@ const UserLogin = ({ navigation }) => {
       }).catch(error => alert("Username or Password is incorrect"))
     
   }
+  const resetPassword = async() => {
+    try {
+      console.log("email",email)
+      await sendPasswordResetEmail(auth,email)
+        .then(() => {
+          alert("Password reset email has been sent")
+        }
+        )
+    }
+    catch (error) {
+      alert("Error")
+    }
+  }
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <View style={styles.container} behavior="padding">
       <View>
         <View style={styles.card}>
           <View style={styles.logSelection}>
@@ -89,13 +102,22 @@ const UserLogin = ({ navigation }) => {
                 style={styles.button}
                 onPress={handleSignin}
                 title="Login"
-                color="green"
+                //color="green"
+              />
+            </View>
+            <View style={styles.Fbtn}>
+              <Button
+                style={styles.Fbutton}
+                onPress={resetPassword}
+                title="Forgot Password"
+                color="red"
+                //color="green"
               />
             </View>
           </View>
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   )
 }
 
@@ -152,7 +174,7 @@ const styles = StyleSheet.create({
     minHeight: 300,
     top: 200,
     width: 300,
-    height: 250,
+    height: 350,
     left: 30,
     borderRadius: 5,
     elevation: 2,
@@ -172,5 +194,28 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderTopRightRadius: 5,
     borderTopLeftRadius: 5,
+  },
+  Fbtn: {
+    top: 80,
+    width: 150,
+    left: 140,
+    padding: 1,
+    margin: 1,
+  
+    //backgroundColor: 'Yellow',
+
+  
+  },
+  Fbutton: {
+    width: 150,
+    padding: 1,
+    margin: 1,
+    fontSize: 1,
+    fontFamily: 'sans-serif',
+    fontWeight: 'light',
+    color: 'black',
+
+    //backgroundColor: 'yellow',
+
   },
 })

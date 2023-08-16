@@ -46,6 +46,16 @@ const AddChagePass = ({ navigation }) => {
 
   return (
     <>
+      <Appbar.Header style={{backgroundColor:"#"}}>
+        <Appbar.BackAction
+          onPress={() => {
+            navigation.goBack()
+          }}
+        />
+        <Appbar.Content title="Change Password" />
+      </Appbar.Header>
+
+    
       <ScrollView style={styles.ScreenView}>
         <View style={styles.TotalScreen}>
           <View style={styles.container}>

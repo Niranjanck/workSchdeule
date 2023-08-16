@@ -16,7 +16,7 @@ const AdminSettings = ({ navigation }) => {
   }, [])
   return (
     <>
-      <Appbar style={{ backgroundColor: "green", minHeight: 100 }}>
+      <Appbar style={{ backgroundColor: "#1e90ff", minHeight: 100 }}>
         <Text style={{ fontSize: 20 }}>
           Settings
         </Text>
@@ -39,14 +39,14 @@ const AdminSettings = ({ navigation }) => {
               </Text>
             </View>
           </TouchableOpacity>
-          <Divider orientation='horizontal' width={1} color='#000'/>
+          {/* <Divider orientation='horizontal' width={1} color='#000'/>
           <TouchableOpacity style={styles.chatPersons} onPress={()=>{navigation.navigate('EmployeeList')}}>
             <View style={styles.wrapper}>
               <Text style={styles.textOptions}>
                 Employee List
               </Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <Divider orientation='horizontal' width={1} color='#000'/>
           <TouchableOpacity style={styles.chatPersons} onPress={()=>{navigation.navigate('RemoveUserAndDept')}}>
             <View style={styles.wrapper}>
@@ -56,7 +56,7 @@ const AdminSettings = ({ navigation }) => {
             </View>
           </TouchableOpacity>
           <Divider orientation='horizontal' width={1} color='#000'/>
-          <TouchableOpacity style={styles.chatPersons} onPress={()=>{navigation.navigate('AdminChangePass')}}>
+          <TouchableOpacity style={styles.chatPersons} onPress={()=>{navigation.navigate('ChangePassword')}}>
             <View style={styles.wrapper}>
               <Text style={styles.textOptions}>
                 Change Password

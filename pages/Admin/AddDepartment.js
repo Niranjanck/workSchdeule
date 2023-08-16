@@ -19,7 +19,7 @@ import { getDatabase, set ,ref} from 'firebase/database'
 const AddDepartment = ({ navigation }) => {
     const [DeptName, setName] = useState('');
     const [AdminPass, setPass] = useState('');
-    const [dID,setID]=useState('');
+    //const [dID,setID]=useState('');
 const AddDept = async () => {
     if (DeptName == '' || AdminPass == '') {
         alert("Please enter department name")
@@ -31,7 +31,7 @@ const AddDept = async () => {
                 setName('')
                 await addDoc(collection(db, "department"), {
                     DeptName: DeptName,
-                    DeptID: dID,
+                    //DeptID: dID,
                 }
                     
                     
@@ -58,9 +58,9 @@ return (
         </Appbar.Header>
         <ScrollView style={styles.ScreenView}>
             <View style={styles.FullScreen}>
-                <Text style={styles.NameText}>Enter department ID</Text>
-                <TextInput style={styles.Input}  placeholder="ID" 
-                    onChangeText={(value) => setID(value)} />
+                {/* <Text style={styles.NameText}>Enter department ID</Text> */}
+                {/* <TextInput style={styles.Input}  placeholder="ID" 
+                    onChangeText={(value) => setID(value)} /> */}
                 <Text style={styles.NameText}>Enter department Name</Text>
                 <TextInput style={styles.Input}  placeholder="Department Name" 
                     onChangeText={(value) => setName(value)} />
